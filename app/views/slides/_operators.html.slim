@@ -1,0 +1,126 @@
+
+.step.slide#operators[data-x=x_succ data-y=0]
+  q
+    span Operadores 
+    small sobrescrevendo geral
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.25em"]
+        | class Square
+            attr_reader :side
+            def initialize side
+              @side = side
+            end
+            def area
+              side ** 2
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.25em"]
+        | small_square = Square.new(2)
+          big_square = Square.new(50)
+          small_square > big_square
+    | NoMethodError: undefined `>' ...
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.25em"]
+        | class Square
+            def > other_square
+              side > other_square.side
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.25em"]
+        | small_square > big_square
+          # false
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.25em"]
+        | class Rectangle
+            attr_reader :sides
+            def initialize *sides
+              @sides = sides
+            end
+            def area
+              sides.first * sides.last
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em;"]
+        | class Square
+            def > other_object
+              area > other_object.area
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | sqr = Square.new(10)
+          rec = Rectangle.new(11, 8)
+          sqr > rec # true
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | sqr > 50
+    | NoMethodError:
+    br
+    | undefined method `area' for Fixnum
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em;"]
+        | class Square
+            alias :to_i :area
+            def > other_object
+              to_i > other_object.to_i
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | sqr > 50 # true
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em; line-height: 1.4em"]
+        | class Symbol
+            def !@
+              return :bad if self == :good
+              super
+            end
+          end
+
+.step.slide.exercise[data-x=x_succ data-y=0]
+  = image_tag 'http://cdn1.iconfinder.com/data/icons/oldschool_babasse/Png/Hardware/ordinateur%20off.png'
+  q[style="font-size:1.1em"]
+    | Implemente os métodos +, - e +@ na classe Hash, de modo que estes funcionem assim:
+    pre
+      code[class="ruby" style="line-height:1.2em"]
+        | {a: 1} + {b: 2} # {a:1, b:2} 
+          {a: 1, b: 1} - {b: 2} # {a: 1, b: 1}
+          {a: 1, b: 2} - {b: 2} # {a: 1}
+          + {a: 1} # {b: 2}
+          + {b: 2, y: 99} + # {c: 3, z: 100}

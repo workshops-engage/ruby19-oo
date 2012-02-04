@@ -1,0 +1,30 @@
+.step.slide#inheritance[data-x=x_succ data-y=0]
+  q
+    span Herança 
+    small #TODO
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em"]
+        | class Person
+            attr_accessor :name, :age
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Student < Person
+            attr_accessor :scores
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | john = Student.new
+          john.name = 'John'
+          john.age = 53
+          john.scores = [7,8,7.5,6]
+

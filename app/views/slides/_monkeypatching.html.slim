@@ -1,0 +1,41 @@
+.step.slide#monkeypatching[data-x=x_succ data-y=0]
+  q
+    span Monkeypatching 
+    small class Monkeypatching ...
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q #TODO monkey patching image here
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class String
+            def is_upcase?
+              self == self.upcase
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | "abc".is_upcase? # false
+          "ABC".is_upcase? # true
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Array
+            alias :old_map :map
+            def map sym
+              old_map &sym
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | [1, 2, 3].map :succ

@@ -1,0 +1,199 @@
+.step.slide#circles[data-x=x_succ data-y=0]
+  q
+    span Circle class 
+    small o exemplo mais clássico
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Point
+            attr_reader :x, :y
+            def initialize x, y
+              @x = x
+              @y = y
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em; line-height: 1.25em"]
+        | class Circle
+            attr_reader :center, :radius
+            def initialize center, radius
+              @center = center
+              @radius = radius
+            end
+            def area
+              radius * Math::PI
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em"]
+        | point = Point.new(0, 0)
+          circle = Circle.new point, 10
+          circle.area # 100
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.65em; line-height: 1.25em"]
+        | class Circle
+            def bounds
+              (0..360).map do |gr|
+                x = center.x + radius * Math.sin(gr)
+                y = center.y + radius * Math.cos(gr)
+                Point.new x, y
+              end
+            end
+          end
+
+.step.slide[data-x=x_succ data-y=0 style="position:relative; background: black"]
+  q[style="color:#999;"] Circle.new Point.new(450, 350), 300
+  div[style="box-shadow: 0 2px 2px rgba(0,0,0,0.3);width:20px; height: 20px; background: red; position: absolute; left: #{@circle.center.x-10}px; top: #{@circle.center.y-10}px"]
+
+  - for bound in @circle.bounds
+    div[style="box-shadow: 0 2px 2px rgba(0,0,0,0.3);width:2px; height: 2px; background: #0f0; position: absolute; left: #{bound.x-1}px; top: #{bound.y-1}px"]
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em; line-height: 1.5em"]
+        | class Point
+            def distance point
+              xd = (x - point.x).abs
+              yd = (y - point.y).abs
+              Math.sqrt(xd ** 2 + yd ** 2)
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.75em"]
+        | class Circle
+            def include? point
+              center.distance(point) < radius
+            end
+          end
+
+.step.slide[data-x=x_succ data-y=0 style="position:relative; background: black"]
+
+  - p1 = Point.new(350,250)
+  div[style="font-size: 20px; color: white; box-shadow: 0 2px 2px rgba(0,0,0,0.3);width:20px; height: 20px; background: #0af; position: absolute; left: #{p1.x-10}px; top: #{p1.y-10}px"] Point.new(350,250)
+
+  - p2 = Point.new(700,50)
+  div[style="font-size: 20px; color: white; box-shadow: 0 2px 2px rgba(0,0,0,0.3);width:20px; height: 20px; background: #0af; position: absolute; left: #{p2.x-10}px; top: #{p2.y-10}px"] Point.new(700,50)
+
+  div[style="box-shadow: 0 2px 2px rgba(0,0,0,0.3);width:20px; height: 20px; background: red; position: absolute; left: #{@circle.center.x-10}px; top: #{@circle.center.y-10}px"]
+
+  - for bound in @circle.bounds
+    div[style="box-shadow: 0 2px 2px rgba(0,0,0,0.3);width:2px; height: 2px; background: #0f0; position: absolute; left: #{bound.x-1}px; top: #{bound.y-1}px"]
+
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.75em"]
+        | center = Point.new(450, 350)
+          circle = Circle.new center, 300
+          p1 = Point.new(350,250)
+          p2 = Point.new(700,50)
+          circle.include? p1 # true
+          circle.include? p2 # true
+
+.step.slide[data-x=x_succ data-y=0 style="position:relative; background: black"]
+
+  - p1 = Point.new(350,250)
+  div[style="font-size: 20px; color: white; box-shadow: 0 2px 2px rgba(0,0,0,0.3);width:20px; height: 20px; background: #0af; position: absolute; left: #{p1.x-10}px; top: #{p1.y-10}px"] Point.new(350,250)
+
+  = render partial: 'circle', locals: {circle: Circle.new(Point.new(50,50), 100), text: "Circle.new(Point.new(50,50),100)" }
+
+  = render partial: 'circle', locals: {circle: Circle.new(Point.new(600,600), 100), text: "Circle.new(Point.new(600,600),100)" }
+
+  = render partial: 'circle', locals: {circle: Circle.new(Point.new(300,200), 100), text: "Circle.new(Point.new(300,200),100)" }
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.75em"]
+        | class Point
+            def === circle
+              circle.include?(self)
+            end
+          end
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.3em"]
+        | def point x, y
+            Point.new(x,y)
+          end
+          def circle x, y, r
+            Circle.new(point(x,y), r)
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em; line-height: 1.4em"]
+        | case point(350, 250)
+          when circle(50, 50, 100)
+            puts "1"
+          when circle(600, 600, 100)
+            puts "2"
+          when circle(300, 200, 100)
+            puts "3"
+          end
+          # => 3
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="line-height: 1.2em"]
+        | class Circle
+            def x
+              center.x
+            end
+            def y
+              center.y
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em; line-height: 1.3em"]
+        | circles = [
+            circle(200, 100, 100),
+            circle(100, 200, 100),
+            circle(100, 100, 200)
+          ]
+          circles.sort_by &:x
+          circles.sort_by &:y
+          circles.sort_by &:radius
+          circles.sort
+      div[style="font-size:0.8em; line-height: 1em"]
+        | ArgumentError:
+        br
+        | comparison of Circle with Circle failed
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Circle
+            def <=> circle
+              area <=> circle.area
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | circles.sort

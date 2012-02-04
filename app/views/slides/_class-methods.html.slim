@@ -1,0 +1,61 @@
+.step.slide#class_methods[data-x=x_succ data-y=0]
+  q
+    span Class methods 
+    small File.open
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | File.open
+          CSV.open
+          Twitter.user
+          User.all
+          User.find_by_name
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="line-height:1.3em; font-size:0.85em"]
+        | class BankAccount
+            attr_reader :money
+            def initialize money
+              @money = money
+            end
+            def self.open money
+              new money
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.95em"]
+        | acc = BankAccount.open(100)
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="line-height:1.25em; font-size:0.8em"]
+        | class BankAccount
+            @@accounts = []
+            def initialize money
+              @money = money
+              @@accounts << self
+            end
+            def self.accounts
+              @@accounts
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | BankAccount.open(100)
+          BankAccount.open(200)
+          BankAccount.open(300)
+          BankAccount.accounts
+    div[style="font-size:0.6em"]
+      | [#&lt;BankAccount @money=100>, #&lt;BankAccount @money=200>, #&lt;BankAccount @money=300>] 
+        

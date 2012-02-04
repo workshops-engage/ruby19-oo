@@ -1,0 +1,105 @@
+.step.slide#classes[data-x=x_succ data-y=0]
+  q
+    span Classes 
+    small as abstrações
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class House
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.4em"]
+        | class House
+            def area= area
+              @area = area
+            end
+            def area
+              @area
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.4em"]
+        | ushers = House.new
+          ushers.area = 123
+          ushers.area # 123
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.4em"]
+        | class House
+            attr_accessor :area
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.4em"]
+        | ushers = House.new
+          ushers.area = 123
+          ushers.area # 123
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.4em"]
+        | class House
+            attr_accessor :area
+            attr_reader :price
+            attr_writer :address
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em; line-height: 1.4em"]
+        | class House
+            attr_reader :area, :price, :address
+            def initialize *args
+              @area, @price, @address = args
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em; line-height: 1.4em"]
+        | marys = House.new(30, 100, "The woods")
+          marys.area # 30
+          marys.price # 100
+          marys.address # The woods
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em; line-height: 1.4em"]
+        | class House
+            def formatted_price
+              "R$ &#35;{price},00"
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em; line-height: 1.4em"]
+        | marys.formatted_price # R$ 30,00
+
+.step.slide.exercise[data-x=x_succ data-y=0]
+  = image_tag 'http://cdn1.iconfinder.com/data/icons/oldschool_babasse/Png/Hardware/ordinateur%20off.png'
+  q[style="font-size:1.1em"]
+    | Crie uma classe Car que receba a marca e a velocidade máxima em km/h e possua um método para retornar a velocidade máxima em m/s.
+    pre
+      code[class="ruby" style="line-height:1.2em"]
+        | ferrari = Car.new("Ferrari", 300)
+          ferrari.brand # Ferrari
+          ferrari.speed # 300
+          ferrari.ms_speed # 1080

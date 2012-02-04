@@ -1,0 +1,106 @@
+.step.slide#modules[data-x=x_succ data-y=0]
+  q
+    span Módulos 
+    small herança múltipla the right way
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em;"]
+        | module Rectangable
+            attr_accessor :width, :height
+            def area
+              width * height
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.8em;"]
+        | module Resizeable
+            include Rectangable
+            def resize perc
+              self.width *= (perc/100.0)
+              self.height *= (perc/100.0)
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Resizeable.new          
+    | NoMethodError:
+    br
+    | undefined method `new' for Resizeable:Module
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Image
+            include Resizeable
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | img = Image.new
+          img.width = 500
+          img.height = 100
+          img.area # 50000.0
+          img.resize 50
+          img.area # 12500.0
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.6em; line-height: 1.2em"]
+        | module ColorMapable
+            include Rectangable
+            attr_accessor :color_map
+            def set_canvas(color="white")
+              self.color_map = Array.new(width){
+                Array.new(height){ color } }
+            end
+            def get_color_on x, y
+              color_map[x][y]
+            end
+            def set_color_on color, x, y
+              color_map[x][y] = color
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Image
+            include ColorMapable
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em; line-height: 1.3em"]
+        | img = Image.new
+          img.width = 10
+          img.height = 10
+          img.set_canvas 'blank'
+          img.get_color_on 5, 5 # blank
+          img.set_color_on 'red', 6, 6
+          img.get_color_on 6, 5 # red
+
+.step.slide[data-x=x_succ data-y=0 style="position:relative"]
+
+    - image = Image.new
+    - image.width = 10
+    - image.height = 10
+    - image.set_canvas('black')
+    - image.set_color_on 'red', 6, 6
+    - image.width.times do |x|
+      - image.height.times do |y|
+        div[style="position:absolute; width: 40px; height: 40px; left: #{x*50+200}px; top: #{y*50+100}px; background: #{image.get_color_on(x,y)};"]
+    
