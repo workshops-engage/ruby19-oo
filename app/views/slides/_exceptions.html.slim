@@ -7,54 +7,50 @@
   q
     pre
       code[class="ruby"]
-        | "Ruby 1.9".class
-          String.class
-          Class.class
+        | begin
+            undef_method
+          rescue NameError => e
+            puts "Undef method!"
+          end
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
       code[class="ruby"]
-        | course = "Ruby 1.9"
-          # Identificador da variável
-    span[style="position:absolute; top: 60px;"] = image_tag 'arrow.png' 
+        | foo = undef_met rescue nil
+          # nil
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
-        | course = "Ruby 1.9"
-          # Valor da variável
-    span[style="position:absolute; top: 60px; left: 380px;"] = image_tag 'arrow.png'
+      code[class="ruby" style="font-size:0.7em;line-height:1.2em"]
+        | require 'open-uri'
+          retry_counter = 0
+          begin
+            open('http://www.google.com')
+          rescue SocketError => e
+            retry_counter += 1
+            if retry_counter < 5
+              sleep 5
+              puts "Retry &#35;{retry_counter}"
+              retry
+            end
+          end
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.7em;line-height:1.2em"]
+        | class SomeError < StandardError; end
+          class Other < StandardError; end
 
 .step.slide.code[data-x=x_succ data-y=0]
   q
     pre
-      code[class="ruby"]
-        | course = "Ruby 1.9"
-          # Atribuição
-    span[style="position:absolute; top: 60px; left: 190px;"] = image_tag 'arrow.png'
-    
-.step.slide.code[data-x=x_succ data-y=0]
-  q
-    pre
-      code[class="ruby"]
-        | course = "Ruby 1.9"
-          # Tipo é definido
-          # implicitamente
-    span[style="position:absolute; top: 60px; left: 245px;"] = image_tag 'arrow.png'
-    span[style="position:absolute; top: 60px; left: 510px;"] = image_tag 'arrow.png'
-
-.step.slide.code[data-x=x_succ data-y=0]
-  q
-    pre
-      code[class="ruby" style="font-size: 0.65em; line-height: 55px"]
-        | # Outros tipos
-          age = 32
-          pi = 3.14
-          accept = true
-          like = false
-          colors = ['red', 'green', 'blue']
-          student = {surname: 'Sellars', score: 7}
-          cep = /\d{5}-\d{3}/
-          minor = 0..17
+      code[class="ruby" style="font-size:0.7em;line-height:1.2em"]
+        | begin
+            bogus
+          rescue SomeError => e
+          rescue OtherError => e
+          ensure
+            puts "Allways"
+          end

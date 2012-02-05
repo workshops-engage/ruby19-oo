@@ -1,0 +1,24 @@
+.step.slide#ppp[data-x=x_succ data-y=0]
+  q
+    span Public, private and protected 
+    br
+    small ppp
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Alpha
+            public
+            def a; "a" + b end
+            protected
+            def b; "b" end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Alpha.new.a # ab
+          Alpha.new.b
+    div[style="font-size:0.9em"] NoMethodError: protected method `b'
