@@ -22,3 +22,64 @@
         | Alpha.new.a # ab
           Alpha.new.b
     div[style="font-size:0.9em"] NoMethodError: protected method `b'
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | class Alpha
+            public
+            def a; "a" + b end
+            private
+            def b; "b" end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Alpha.new.a # ab
+          Alpha.new.b
+    div[style="font-size:0.9em"] NoMethodError: private method `b'
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.8em; line-height: 1.4em"]
+        | class Person
+            def >(other_person)
+              self.age > other_person.age
+            end
+            protected
+            def age
+              20
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Person.new > Person.new
+          # false
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size: 0.8em; line-height: 1.4em"]
+        | class Person
+            def >(other_person)
+              self.age > other_person.age
+            end
+            private
+            def age
+              20
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Person.new > Person.new
+    | NoMethodError: private method `age' 
