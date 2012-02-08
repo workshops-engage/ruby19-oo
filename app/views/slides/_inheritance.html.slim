@@ -28,3 +28,39 @@
           john.age = 53
           john.scores = [7,8,7.5,6]
 
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em"]
+        | class Greeter
+            def hello
+              puts "Hello, how are you?"
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Greeter.new.hello
+    | => Hello, how are you?
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby" style="font-size:0.9em"]
+        | class Responder < Greeter
+            def hello
+              super
+              puts "I'm fine, thanks!"
+            end
+          end
+
+.step.slide.code[data-x=x_succ data-y=0]
+  q
+    pre
+      code[class="ruby"]
+        | Responder.new.hello
+    | => Hello, how are you?
+    br
+    | => I'm fine, thanks?
